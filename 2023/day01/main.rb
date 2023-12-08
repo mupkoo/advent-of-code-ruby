@@ -18,8 +18,7 @@ end
 DIGIT_MAP =
   %w[zero one two three four five six seven eight nine]
   .each_with_index.map do |word, number|
-    [[word, number.to_s],
-     [number.to_s, number.to_s]]
+    [[word, number.to_s], [number.to_s, number.to_s]]
   end.flatten(1).to_h.freeze
 
 def part2(input)
