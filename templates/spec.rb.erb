@@ -1,0 +1,22 @@
+require_relative 'main'
+
+RSpec.describe 'Day <%= @day %>, <%= @year %>' do
+  let(:input) { File.read(File.join(__dir__, 'input.txt')) }
+  let(:example) do
+    <<~EXAMPLE
+      Add example input here
+    EXAMPLE
+  end
+
+  describe 'part 1' do
+    it 'solves the example' do
+      expect(part1(example)).to eq(0)
+    end
+  end
+
+  describe 'part 2' do
+    it 'solves the example' do
+      expect(part2(example)).to eq(0)
+    end
+  end
+end

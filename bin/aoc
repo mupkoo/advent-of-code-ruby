@@ -1,0 +1,100 @@
+#!/usr/bin/env ruby
+require 'bundler/setup'
+require 'dry/cli'
+require 'erb'
+require_relative '../lib/aoc/client'
+
+module AOC
+  module CLI
+    module Commands
+      extend Dry::CLI::Registry
+
+      class Run < Dry::CLI::Command
+        desc 'Run a solution'
+
+        option :year, default: '2023', values: (2015..2023).map(&:to_s), desc: 'Year'
+        option :day, default: nil, values: (1..25).map(&:to_s), desc: 'Day, defaults to the latest day'
+        option :part, default: 1, values: (1..2).map(&:to_s), desc: 'Part'
+
+        def call(**options)
+          year = options.fetch(:year)
+          day = options.fetch(:day) { latest_day(year) }
+          part = options.fetch(:part)
+
+          day = day.to_s.rjust(2, '0')
+          path = "#{year}/day#{day}/main.rb"
+
+          unless File.exist?(path)
+            puts "No solution found for #{day}, #{year}"
+            exit 1
+          end
+
+          require_relative "../#{path}"
+
+          puts "Running solution for day #{day}, #{year} - part #{part}..."
+          result = main(part)
+          puts "Result: #{result}"
+        end
+
+        private
+
+        def latest_day(year)
+          Dir["#{year}/day*"].map do |path|
+            path.split('/').last.gsub('day', '').to_i
+          end.max
+        end
+      end
+
+      class Generate < Dry::CLI::Command
+        desc 'Generate a solution skeleton'
+
+        option :year, default: '2023', values: (2015..2023).map(&:to_s), desc: 'Year'
+        option :day, default: nil, values: (1..25).map(&:to_s), desc: 'Day, defaults to the latest day'
+
+        def call(**options)
+          @year = options.fetch(:year)
+          @day = options.fetch(:day) { latest_day(@year) }
+
+          if @day < 1 || @day > 25
+            puts "Invalid day: #{day}, must be between 1 and 25"
+            exit 1
+          end
+
+          puts "Generating skeleton for day #{@day}, #{@year}..."
+          folder = "#{@year}/day#{@day.to_s.rjust(2, '0')}"
+
+          FileUtils.mkdir_p(folder)
+          File.write("#{folder}/input.txt", client.input(@year, @day).body)
+          File.write("#{folder}/main.rb", compile_template('main'))
+          File.write("#{folder}/spec.rb", compile_template('spec'))
+
+          puts 'Done!'
+        end
+
+        private
+
+        def latest_day(year)
+          days = Dir["#{year}/day*"].map do |path|
+            path.split('/').last.gsub('day', '').to_i
+          end
+
+          days.empty? ? 1 : days.max + 1
+        end
+
+        def client
+          @client ||= AOC::Client.new(ENV.fetch('AOC_SESSION_COOKIE'))
+        end
+
+        def compile_template(template_name)
+          template = File.read(File.join(__dir__, "../templates/#{template_name}.rb.erb"))
+          ERB.new(template).result(binding)
+        end
+      end
+
+      register 'run', Run
+      register 'generate', Generate, aliases: ['g']
+    end
+  end
+end
+
+Dry::CLI.new(AOC::CLI::Commands).call

@@ -1,0 +1,19 @@
+def main(part)
+  file = File.join(__dir__, 'input.txt')
+  input = File.read(file)
+  raise 'Empty input.txt file' if input.empty?
+
+  part == 1 ? part1(input) : part2(input)
+end
+
+def part1(input)
+  'not implemented'
+end
+
+def part2(input)
+  'not implemented'
+end
+
+def parse_input(input)
+  input.lines(chomp: true)
+end
