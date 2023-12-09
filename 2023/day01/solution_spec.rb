@@ -1,6 +1,8 @@
-require_relative 'main'
+require_relative 'solution'
 
-RSpec.describe 'Day 1, 2023' do
+RSpec.describe Aoc2023::Day01 do
+  subject(:solution) { described_class.new }
+
   let(:input) { File.read(File.join(__dir__, 'input.txt')) }
 
   describe 'part 1' do
@@ -14,11 +16,11 @@ RSpec.describe 'Day 1, 2023' do
     end
 
     it 'solves the example' do
-      expect(part1(example)).to eq(12 + 34 + 24 + 22)
+      expect(solution.part1(example)).to eq(12 + 34 + 24 + 22)
     end
 
     it 'solves the input' do
-      expect(part1(input)).to eq(55_712)
+      expect(solution.part1(input)).to eq(55_712)
     end
   end
 
@@ -36,11 +38,11 @@ RSpec.describe 'Day 1, 2023' do
     end
 
     it 'solves the example' do
-      expect(part2(example)).to eq(281)
+      expect(solution.part2(example)).to eq(281)
     end
 
     it 'solves the input' do
-      expect(part2(input)).to eq(55_413)
+      expect(solution.part2(input)).to eq(55_413)
     end
   end
 end

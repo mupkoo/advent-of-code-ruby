@@ -1,0 +1,31 @@
+require_relative 'solution'
+
+RSpec.describe Aoc<%= @year %>::Day<%= @day.to_s.rjust(2, '0') %> do
+  subject(:solution) { described_class.new }
+  let(:input) { File.read(File.join(__dir__, 'input.txt')) }
+  let(:example) do
+    <<~EXAMPLE
+      Add example input here
+    EXAMPLE
+  end
+
+  describe 'part 1' do
+    it 'solves the example' do
+      expect(solution.part1(example)).to eq(0)
+    end
+
+    it 'solves the input' do
+      expect(solution.part1(input)).to eq(0)
+    end
+  end
+
+  describe 'part 2' do
+    it 'solves the example' do
+      expect(solution.part2(example)).to eq(0)
+    end
+
+    it 'solves the input' do
+      expect(solution.part2(input)).to eq(0)
+    end
+  end
+end

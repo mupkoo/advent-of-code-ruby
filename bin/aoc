@@ -24,7 +24,7 @@ module AOC
           day = day.to_s.rjust(2, '0')
           folder = "#{year}/day#{day}/"
 
-          unless File.exist?(File.join(folder, 'main.rb'))
+          unless File.exist?(File.join(folder, 'solution.rb'))
             puts "No solution found for #{day}, #{year}"
             exit 1
           end
@@ -34,10 +34,10 @@ module AOC
             exit 1
           end
 
-          require File.join(__dir__, '../', folder, 'main.rb')
+          require File.join(__dir__, '../', folder, 'solution.rb')
 
           puts "Running solution for day #{day}, #{year} - part #{part}..."
-          result = main(part)
+          result = Object.const_get("Aoc#{year}::Day#{day}").new.solve(part)
           puts "Result: #{result}"
         end
 
@@ -71,8 +71,8 @@ module AOC
 
           FileUtils.mkdir_p(folder)
           File.write("#{folder}/input.txt", client.input(@year, @day).body)
-          File.write("#{folder}/main.rb", compile_template('main')) if type == 'skeleton'
-          File.write("#{folder}/spec.rb", compile_template('spec')) if type == 'skeleton'
+          File.write("#{folder}/solution.rb", compile_template('solution')) if type == 'skeleton'
+          File.write("#{folder}/solution_spec.rb", compile_template('solution_spec')) if type == 'skeleton'
 
           puts 'Done!'
         end

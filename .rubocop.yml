@@ -9,7 +9,7 @@
 #
 # See https://docs.rubocop.org/rubocop/configuration
 require:
-  - rubocop-minitest
+  - rubocop-rspec
 
 AllCops:
   NewCops: enable
@@ -36,5 +36,11 @@ Style/Documentation:
 Style/FrozenStringLiteralComment:
   Enabled: false
 
-Minitest/MultipleAssertions:
+RSpec/DescribeClass:
+  Enabled: false
+
+RSpec/FilePath:
+  Enabled: false
+
+RSpec/SpecFilePathFormat:
   Enabled: false
