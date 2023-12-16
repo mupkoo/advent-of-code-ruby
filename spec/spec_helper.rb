@@ -2,7 +2,7 @@ $LOAD_PATH.unshift File.expand_path('..', __dir__)
 
 # See https://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
 RSpec.configure do |config|
-  config.pattern = '{2023,spec}/**/*spec.rb' if ARGV.empty?
+  config.pattern = '{2015,2023,spec}/**/*spec.rb' if ARGV.empty?
 
   # rspec-expectations config goes here. You can use an alternate
   # assertion/expectation library such as wrong or the stdlib/minitest
