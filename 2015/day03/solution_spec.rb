@@ -16,7 +16,7 @@ RSpec.describe Aoc2015::Day03 do
       end
     end
 
-    it 'solves the input' do
+    it 'solves the input', :input do
       expect(solution.part1(input)).to eq(2081)
     end
   end
@@ -32,7 +32,7 @@ RSpec.describe Aoc2015::Day03 do
       end
     end
 
-    it 'solves the input' do
+    it 'solves the input', :input do
       expect(solution.part2(input)).to eq(2341)
     end
   end

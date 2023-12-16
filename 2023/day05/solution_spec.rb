@@ -47,7 +47,7 @@ RSpec.describe Aoc2023::Day05 do
       expect(solution.part1(example)).to eq(35)
     end
 
-    it 'solves the input' do
+    it 'solves the input', :input do
       expect(solution.part1(input)).to eq(510_109_797)
     end
   end
@@ -58,7 +58,7 @@ RSpec.describe Aoc2023::Day05 do
     end
 
     # The solution is not really optimal. It should be range-based
-    # it 'solves the input' do
+    # it 'solves the input', :input do
     #   expect(solution.part2(input)).to eq(9622622)
     # end
   end

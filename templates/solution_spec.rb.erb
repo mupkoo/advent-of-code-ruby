@@ -15,7 +15,7 @@ RSpec.describe Aoc<%= @year %>::Day<%= @day.to_s.rjust(2, '0') %> do
       expect(solution.part1(example)).to eq(0)
     end
 
-    it 'solves the input' do
+    it 'solves the input', :input do
       expect(solution.part1(input)).to eq(0)
     end
   end
@@ -25,7 +25,7 @@ RSpec.describe Aoc<%= @year %>::Day<%= @day.to_s.rjust(2, '0') %> do
       expect(solution.part2(example)).to eq(0)
     end
 
-    it 'solves the input' do
+    it 'solves the input', :input do
       expect(solution.part2(input)).to eq(0)
     end
   end

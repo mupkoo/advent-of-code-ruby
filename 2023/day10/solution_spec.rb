@@ -22,7 +22,7 @@ RSpec.describe Aoc2023::Day10 do
       it { is_expected.to eq(8) }
     end
 
-    it 'solves the input' do
+    it 'solves the input', :input do
       expect(solution.part1(input)).to eq(6649)
     end
   end
@@ -104,7 +104,7 @@ RSpec.describe Aoc2023::Day10 do
       it { is_expected.to eq(10) }
     end
 
-    it 'solves the input' do
+    it 'solves the input', :input do
       expect(solution.part2(input)).to eq(601)
     end
   end
